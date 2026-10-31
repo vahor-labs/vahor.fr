@@ -17,9 +17,11 @@ RUN bun run build
 FROM node:26-bookworm-slim AS runner
 WORKDIR /app
 
+ARG APP_BUILD_SHA
 ENV NODE_ENV=production \
 	HOST=0.0.0.0 \
-	PORT=4321
+	PORT=4321 \
+	APP_BUILD_SHA=${APP_BUILD_SHA}
 
 COPY package.json ./
 COPY --from=deps /app/node_modules ./node_modules

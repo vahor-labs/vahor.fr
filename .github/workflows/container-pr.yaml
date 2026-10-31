@@ -15,4 +15,4 @@ permissions:
 jobs:
   image:
     name: Build PR image
-    uses: vahor-labs/actions/.github/workflows/build-app-image.yml@main
+    uses: vahor-labs/actions/.github/workflows/pr-build.yml@main
