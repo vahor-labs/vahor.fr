@@ -16,5 +16,3 @@ jobs:
   image:
     name: Build PR image
     uses: vahor-labs/actions/.github/workflows/pr-build.yml@main
-    with:
-      preview-url: https://vahor-fr-${{ github.event.pull_request.number }}.preview.vahor.fr
