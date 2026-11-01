@@ -18,48 +18,6 @@ permissions:
 jobs:
   untagged:
     name: Delete untagged versions
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete untagged image versions
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: ${{ github.repository_owner }}
-          REPOSITORY: ${{ github.repository }}
-          PACKAGE: ${{ github.event.repository.name }}
-          OLDER_THAN_HOURS: ${{ github.event.inputs.older_than_hours || '24' }}
-        run: |
-          set -euo pipefail
-
-          case "${OLDER_THAN_HOURS}" in
-            '' | *[!0-9]*)
-              echo "older_than_hours must be a non-negative integer" >&2
-              exit 1
-              ;;
-          esac
-
-          if [ "$(gh api "repos/${REPOSITORY}" --jq .owner.type)" = "Organization" ]; then
-            owner_path="orgs/${OWNER}"
-          else
-            owner_path="users/${OWNER}"
-          fi
-
-          cutoff=$(( $(date -u +%s) - OLDER_THAN_HOURS * 3600 ))
-          ids=$(
-            gh api --paginate --slurp \
-              "${owner_path}/packages/container/${PACKAGE}/versions?per_page=100" |
-              jq -r --argjson cutoff "$cutoff" '
-                .[][]
-                | select((.metadata.container.tags // []) | length == 0)
-                | select((.created_at | fromdateiso8601) < $cutoff)
-                | .id
-              '
-          )
-
-          count=$(printf "%s" "$ids" | wc -w | tr -d ' ')
-          echo "Found ${count} untagged versions older than ${OLDER_THAN_HOURS}h"
-
-          for id in $ids; do
-            echo "Deleting untagged ${PACKAGE} version ${id}"
-            gh api --method DELETE \
-              "${owner_path}/packages/container/${PACKAGE}/versions/${id}"
-          done
+    uses: vahor-labs/actions/.github/workflows/image-cleanup.yml@main
+    with:
+      older_than_hours: ${{ github.event.inputs.older_than_hours || '24' }}
