@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a reproducible website problem.
+body:
+  - type: markdown
+    attributes:
+      value: "Reports are public. Do not include credentials, private configurations, private URLs, or unsanitized logs. Use placeholders when needed."
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the public page or local revision, steps to reproduce, and a minimal example if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: Describe what happened; sanitized screenshots are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Relevant environment (optional)
+      description: Browser, OS, viewport, or Node.js and Bun versions for local development.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs (optional)
+      description: Remove credentials, private configurations, and private URLs before sharing.
+      render: text

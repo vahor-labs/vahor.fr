@@ -1,4 +1,42 @@
-## Vahor
+# vahor.fr
+
+My portfolio and writing, built with Astro.
+
+[![Code quality](https://github.com/vahor-labs/vahor.fr/actions/workflows/quality.yaml/badge.svg)](https://github.com/vahor-labs/vahor.fr/actions/workflows/quality.yaml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+[Visit vahor.fr](https://vahor.fr) · [Quick start](#quick-start) · [Container](#container) · [Contributing](CONTRIBUTING.md)
+
+![Homepage of vahor.fr](docs/assets/homepage.png)
+
+- **Writing in MDX** with tags, RSS, Markdown exports and generated social images.
+- **Lightweight by default** with on-demand search and no React runtime.
+- **Server-rendered listening activity** with optional Spotify and Redis integration.
+
+## Quick start
+
+Use Node 26 and Bun:
+
+```sh
+bun install --frozen-lockfile
+bun dev
+```
+
+Local builds require no secrets. Spotify is optional; without it, the listening
+block is omitted. See [CONTRIBUTING.md](CONTRIBUTING.md) for development checks.
+
+## How it works
+
+| Area | Implementation |
+| --- | --- |
+| Pages and articles | Astro + MDX; static output except the homepage and legacy redirects |
+| Search | Fuse and its index load only when search opens |
+| Feeds | RSS at `/rss.xml`, sitemap at `/sitemap-index.xml` |
+| Images | Astro image processing and build-time social cards |
+| Runtime | Node standalone container; Spotify fetched on the server |
+
+<details>
+<summary>Rendering, accessibility and published-URL compatibility</summary>
 
 Static Astro portfolio and MDX blog, deployed as a Node container. Pages, tags, RSS,
 Markdown exports and social images are generated at build time. No React runtime
@@ -25,23 +63,9 @@ The original `public/` images are retained for published URLs and Markdown
 exports; keep these compatibility copies when updating existing images.
 RSS channel metadata is serialized from an object with `fast-xml-builder`.
 
-### Development and verification
+</details>
 
-Use Node 26 and Bun, then `bun install --frozen-lockfile` and `bun dev`.
-
-- `bun run typecheck` — Astro and TypeScript checks.
-- `bunx biome ci .` — non-mutating formatting and lint checks.
-- `bun run build` — production output using the Node standalone adapter.
-- `bun run build && bun run start --port 4321` — local production preview.
-- `bunx playwright install chromium && bun run test` — route/export, search,
-  theme, clipboard and code-wrap browser tests. Set `PLAYWRIGHT_CHANNEL=chrome`
-  to use an installed Google Chrome instead.
-  Browser tests start their own production preview on port 4329; they never reuse
-  a development server on port 4321.
-
-`bun test` invokes Bun's test runner; use `bun run test` for Playwright.
-
-### Container
+## Container
 
 Build and run the production image:
 
@@ -57,7 +81,14 @@ Biome's unused-import/variable rules are disabled for `.astro` files because
 template references are not counted as frontmatter usage. `astro check` validates
 those references instead; do not auto-remove imports used by templates.
 
-### Integrations
+## Integrations
+
+> [!NOTE]
+> Credentials belong in the server environment, never in `PUBLIC_` variables,
+> committed files or issue reports.
+
+<details>
+<summary>Spotify, Redis, URL previews and comments</summary>
 
 Local builds require no secrets. Configure `SPOTIFY_CLIENT_ID`,
 `SPOTIFY_CLIENT_SECRET`, `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
@@ -84,7 +115,12 @@ Network access is needed for remote preview metadata; unavailable preview images
 can use the transparent fallback. Giscus retains the original repository/category
 and pathname mapping; no authenticated comment posting is part of local checks.
 
-### Upgrade compatibility exceptions
+</details>
+
+## Compatibility notes
+
+<details>
+<summary>Dependency pins and upgrade constraints</summary>
 
 Dependencies were reviewed and upgraded where compatible, including major
 versions. Some retained packages already satisfied the review or remain on their
@@ -96,3 +132,14 @@ registry release. Explicit compatibility pins are:
 - D2 stays on `0.1.23`: tested published versions 0.1.27–0.1.33 reject the
   existing article's wildcard style rule. Retaining the pin preserves diagrams
   without rewriting historical content.
+
+</details>
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, checks and pull requests.
+Found a bug or have an idea? Use the [issue forms](https://github.com/vahor-labs/vahor.fr/issues/new/choose).
+
+## License
+
+[MIT](LICENSE).
