@@ -7,7 +7,7 @@ My portfolio and writing, built with Astro.
 
 [Visit vahor.fr](https://vahor.fr) · [Quick start](#quick-start) · [Container](#container) · [Contributing](CONTRIBUTING.md)
 
-![Homepage of vahor.fr](docs/assets/homepage.png)
+![Homepage of vahor.fr](.github/homepage.png)
 
 - MDX articles, RSS and Markdown exports.
 - On-demand search. No React runtime.
