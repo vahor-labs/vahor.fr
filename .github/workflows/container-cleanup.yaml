@@ -18,6 +18,6 @@ permissions:
 jobs:
   untagged:
     name: Delete untagged versions
-    uses: vahor-labs/actions/.github/workflows/image-cleanup.yml@main
+    uses: vahor-labs/actions/.github/workflows/image-cleanup.yml@2204471e990b4dd04ec0ef315b747a3b44a68f61 # main
     with:
       older_than_hours: ${{ github.event.inputs.older_than_hours || '24' }}
