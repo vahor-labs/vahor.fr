@@ -26,13 +26,13 @@ No secrets needed for local builds.
 
 ## Stack
 
-| Area | Implementation |
-| --- | --- |
-| Pages and articles | Astro + MDX; mostly static |
-| Search | Fuse, loaded on demand |
-| Feeds | RSS at `/rss.xml`, sitemap at `/sitemap-index.xml` |
-| Images | Astro image processing and build-time social cards |
-| Runtime | Node standalone server |
+| Area               | Implementation                                     |
+| ------------------ | -------------------------------------------------- |
+| Pages and articles | Astro + MDX; mostly static                         |
+| Search             | Fuse, loaded on demand                             |
+| Feeds              | RSS at `/rss.xml`, sitemap at `/sitemap-index.xml` |
+| Images             | Astro image processing and build-time social cards |
+| Runtime            | Node standalone server                             |
 
 ## Container
 
@@ -45,12 +45,12 @@ Pass integration variables at runtime. Omit `--env-file` to run without them.
 
 ## Integrations
 
-| Integration | Configuration |
-| --- | --- |
-| Spotify | `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` |
-| Redis | `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` (or `KV_REST_API_URL` and `KV_REST_API_TOKEN`) |
-| Comments | Giscus |
-| URL previews | Build-time metadata; optional Redis cache |
+| Integration  | Configuration                                                                                          |
+| ------------ | ------------------------------------------------------------------------------------------------------ |
+| Spotify      | `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`                                                        |
+| Redis        | `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` (or `KV_REST_API_URL` and `KV_REST_API_TOKEN`) |
+| Comments     | Giscus                                                                                                 |
+| URL previews | Build-time metadata; optional Redis cache                                                              |
 
 For Spotify:
 
