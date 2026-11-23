@@ -9,6 +9,8 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
+			"!.next",
+			"!.contentlayer",
 			"!public",
 			"!src/assets",
 			"!dist",
