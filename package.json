@@ -52,7 +52,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.12",
-		"@biomejs/biome": "2.6.8",
+		"@biomejs/biome": "2.6.9",
 		"@tailwindcss/vite": "^4.3.3",
 		"@terrastruct/d2": "0.1.23",
 		"@total-typescript/ts-reset": "^0.6.1",
